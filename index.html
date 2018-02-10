@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>Game</title>
+    <style>
+        table{
+            margin-top: 10px;
+            margin-left: 10px;
+            
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: whitesmoke;
+            font-size: 80px;
+            color: black;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn{
+            margin-left: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="message"></div>
+    <table border="1">
+        <tr>
+            <td id="cel11" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel12" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel13" class="cell" onclick="play(this.id); verif()"> </td>
+        </tr>
+
+        <tr>
+            <td id="cel21" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel22" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel23" class="cell" onclick="play(this.id); verif()"></td>
+        </tr>
+        <tr>
+            <td id="cel31" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel32" class="cell" onclick="play(this.id); verif()"></td>
+            <td id="cel33" class="cell" onclick="play(this.id); verif()"></td>
+        </tr>
+    </table>
+    <br>
+    <button class="btn btn-secondary" onclick="newGame()">Novo Game</button>
+    <script>
+
+        letra = 'X'
+
+        function play(square) {
+            var square_click = document.getElementById(square).innerHTML;
+            if (square_click == 'X' || square_click == 'O') {
+                alert('Campo ja preenchidos')
+            } else {
+                var square_click = document.getElementById(square).innerHTML = letra
+                if (square_click == "X") {
+                    letra = "O"
+                } else {
+                    letra = "X"
+                }
+            }
+        }
+
+        function verif() {
+
+            c11 = document.getElementById("cel11").innerHTML;
+            c12 = document.getElementById("cel12").innerHTML;
+            c13 = document.getElementById("cel13").innerHTML;
+            c21 = document.getElementById("cel21").innerHTML;
+            c22 = document.getElementById("cel22").innerHTML;
+            c23 = document.getElementById("cel23").innerHTML;
+            c31 = document.getElementById("cel31").innerHTML;
+            c32 = document.getElementById("cel32").innerHTML;
+            c33 = document.getElementById("cel33").innerHTML;
+
+
+            if (((c11 != '') && (c12 != '') && (c13 != '')
+                && (c11 == c12) && (c12 == c13))
+                || ((c11 != '') && (c22 != '') && (c33 != '')
+                    && (c11 == c22) && (c22 == c33))
+                || ((c11 != '') && (c21 != '') && (c31 != '')
+                    && (c11 == c21) && (c21 == c31))
+                || ((c21 != '') && (c22 != '') && (c23 != '')
+                    && (c21 == c22) && (c22 == c23))
+                || ((c31 != '') && (c32 != '') && (c33 != '')
+                    && (c31 == c32) && (c32 == c33))
+                || ((c12 != '') && (c22 != '') && (c32 != '')
+                    && (c12 == c22) && (c22 == c32))
+                || ((c13 != '') && (c23 != '') && (c33 != '')
+                    && (c13 == c23) && (c23 == c33))
+                || ((c31 != '') && (c22 != '') && (c13 != '')
+                    && (c31 == c22) && (c22 == c13))) {
+                document.getElementById("message").innerHTML = "Voce Ganhou!!"
+                
+            }
+        }
+
+        function newGame() {
+            for (var i = 1; i < 4; i++) {
+                for (var j = 1; j < 4; j++) {
+                    var namecel = 'cel' + i + j
+
+                    document.getElementById(namecel).innerHTML = '';
+                    document.getElementById("message").innerHTML = "";
+                }
+
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
